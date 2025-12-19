@@ -1,0 +1,40 @@
+# Virtual environment
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Project
+tmp/
+logs/
+*.mp4
+*.jpg
+*.png
+*.jpeg
+*.wav
+*.mp3
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
