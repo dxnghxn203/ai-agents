@@ -1,0 +1,48 @@
+{
+  "type": "tts",
+  "provider": "elevenlabs",
+  "model_id": "eleven_multilingual_v2",
+  "name": "ElevenLabs Multilingual v2",
+  "description": "High-quality multilingual text-to-speech with emotional control",
+  "is_primary": true,
+  "priority": 1,
+  "voice_id": "rachel",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.5,
+    "style": 0.5,
+    "use_speaker_boost": true
+  },
+  "output_format": "mp3",
+  "sample_rate": 24000,
+  "languages": [
+    "en",
+    "es",
+    "fr",
+    "de",
+    "it",
+    "pt",
+    "pl",
+    "ru",
+    "nl",
+    "tr",
+    "ja",
+    "zh",
+    "ko",
+    "ar",
+    "hi",
+    "vi"
+  ],
+  "cost_per_1k_characters": 0.30,
+  "capabilities": [
+    "multilingual_tts",
+    "voice_cloning",
+    "emotional_control",
+    "speed_control"
+  ],
+  "use_cases": [
+    "narration_generation",
+    "voice_over",
+    "character_voices"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "vietnamese_analysis": {
+    "id": "vietnamese_analysis",
+    "name": "Vietnamese Video Analysis Template",
+    "description": "Template for analyzing Vietnamese video prompts",
+    "language": "vi",
+    "template": "Phân tích prompt sau đây để tạo video: \"{prompt}\"\n\nYêu cầu phân tích:\n1. Phong cách video (cinematic, anime, documentary, etc.)\n2. Tâm trạng chính (vui vẻ, nghiêm túc, lãng mạn, etc.)\n3. Yếu tố chính cần có trong video\n4. Thời lượng ước tính (giây)\n5. Số lượng cảnh gợi ý\n6. Đối tượng mục tiêu\n7. Chủ đề hình ảnh chính\n8. Bảng màu phù hợp\n9. Chuyển động camera gợi ý\n\nTrả về kết quả dưới dạng JSON.",
+    "variables": ["prompt"],
+    "category": "analysis",
+    "agent_type": "analyzer",
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  },
+  "english_analysis": {
+    "id": "english_analysis",
+    "name": "English Video Analysis Template",
+    "description": "Template for analyzing English video prompts",
+    "language": "en",
+    "template": "Analyze this prompt for video generation: \"{prompt}\"\n\nProvide analysis for:\n1. Video style (cinematic, anime, documentary, etc.)\n2. Primary mood (happy, serious, romantic, etc.)\n3. Key elements to include\n4. Estimated duration (seconds)\n5. Recommended scene count\n6. Target audience\n7. Main visual themes\n8. Appropriate color palette\n9. Suggested camera movements\n\nReturn results in JSON format.",
+    "variables": ["prompt"],
+    "category": "analysis",
+    "agent_type": "analyzer",
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  },
+  "image_analysis": {
+    "id": "image_analysis",
+    "name": "Image-based Video Analysis Template",
+    "description": "Template for analyzing prompts with input images",
+    "language": "en",
+    "template": "Analyze this prompt for video generation with {image_count} images provided:\n\nPrompt: \"{prompt}\"\n\nImages: {image_descriptions}\n\nAnalyze:\n1. How the images enhance the prompt\n2. Key visual elements from images\n3. Integration strategy for images in video\n4. Scene composition recommendations\n5. Color palette based on images\n6. Technical considerations\n\nReturn comprehensive analysis in JSON format.",
+    "variables": ["prompt", "image_count", "image_descriptions"],
+    "category": "analysis",
+    "agent_type": "analyzer",
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  }
+}

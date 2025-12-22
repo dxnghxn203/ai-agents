@@ -6,12 +6,20 @@ class Settings(BaseSettings):
     openai_api_key: Optional[str] = None
     anthropic_api_key: Optional[str] = None
     elevenlabs_api_key: Optional[str] = None
-    
+
+    # Replicate for image generation
+    replicate_api_token: Optional[str] = None
+
+    # Celery Configuration
+    celery_broker_url: str = "redis://localhost:6379/0"
+    celery_result_backend: str = "redis://localhost:6379/0"
+    celery_backend: str = "redis://localhost:6379/0"
+
     # Storage
     s3_bucket_name: Optional[str] = None
     aws_access_key_id: Optional[str] = None
     aws_secret_access_key: Optional[str] = None
-    
+
     # App
     tmp_dir: str = "tmp"
     max_video_duration: int = 60  # seconds

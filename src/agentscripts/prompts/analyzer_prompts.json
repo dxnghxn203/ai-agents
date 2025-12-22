@@ -1,0 +1,53 @@
+{
+  "style_analysis": {
+    "id": "style_analysis",
+    "name": "Style Analysis Prompt",
+    "description": "Detailed prompt for analyzing video style requirements",
+    "category": "analysis",
+    "agent_type": "analyzer",
+    "language": "en",
+    "system_prompt": "You are an expert video producer and cinematographer with deep knowledge of various video styles, visual aesthetics, and production techniques. Analyze prompts to determine the optimal video style and approach.",
+    "prompts": {
+      "base": "Analyze the video style requirements for: {prompt}",
+      "detailed": "Provide a comprehensive style analysis for video production of: {prompt}\n\nConsider:\n1. Genre and style category\n2. Visual aesthetics\n3. Color scheme\n4. Camera techniques\n5. Lighting requirements\n6. Editing style\n7. Audio-visual relationship",
+      "technical": "Give technical specifications for video style of: {prompt}\n\nInclude:\n- Resolution requirements\n- Frame rate\n- Color grading needs\n- Equipment suggestions\n- Post-production effects"
+    },
+    "variables": ["prompt"],
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  },
+  "mood_analysis": {
+    "id": "mood_analysis",
+    "name": "Mood Analysis Prompt",
+    "description": "Prompt for analyzing emotional tone and mood requirements",
+    "category": "analysis",
+    "agent_type": "analyzer",
+    "language": "en",
+    "system_prompt": "You are an expert in emotional storytelling and audience psychology. Analyze prompts to determine the emotional impact and mood requirements for effective video content.",
+    "prompts": {
+      "base": "Determine the emotional mood and tone for: {prompt}",
+      "detailed": "Analyze the emotional journey and mood requirements for: {prompt}\n\nConsider:\n1. Primary emotions to evoke\n2. Mood progression\n3. Pacing for emotional impact\n4. Color psychology\n5. Music and sound design mood\n6. Visual elements for emotional support",
+      "audience": "Analyze mood for target audience engagement: {prompt}\n\nFocus on:\n- Emotional resonance\n- Cultural considerations\n- Age-appropriate content\n- Psychological impact"
+    },
+    "variables": ["prompt"],
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  },
+  "vietnamese_style": {
+    "id": "vietnamese_style",
+    "name": "Vietnamese Style Analysis",
+    "description": "Style analysis prompt optimized for Vietnamese content",
+    "category": "analysis",
+    "agent_type": "analyzer",
+    "language": "vi",
+    "system_prompt": "Bạn là chuyên gia sản xuất video và đạo diễn hình ảnh có kiến thức sâu về phong cách video Việt Nam và thị hiếu địa phương. Phân tích các yêu cầu về phong cách video.",
+    "prompts": {
+      "base": "Phân tích yêu cầu phong cách video cho: {prompt}",
+      "cultural": "Phân tích phong cách video phù hợp với văn hóa Việt Nam: {prompt}\n\nXem xét:\n1. Phong cách thịnh hành tại Việt Nam\n2. Yếu tố văn hóa địa phương\n3. Màu sắc phù hợp\n4. Tâm trạng khán giả Việt\n5. Kỹ thuật sản xuất phổ biến",
+      "technical": "Đưa ra thông số kỹ thuật cho phong cách video Việt Nam: {prompt}\n\nBao gồm:\n- Độ phân giải phù hợp\n- Tốc độ khung hình\n- Yêu cầu màu sắc\n- Hiệu ứng thịnh hành"
+    },
+    "variables": ["prompt"],
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  }
+}

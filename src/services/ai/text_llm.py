@@ -1,10 +1,13 @@
 """Text-only LLM wrapper service for script generation."""
+import logging
 from typing import Dict, Any, Optional
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage
 
 from src.core.config import settings
+
+logger = logging.getLogger(__name__)
 
 
 class TextLLMService:
@@ -18,9 +21,11 @@ class TextLLMService:
             temperature: Sampling temperature for creativity (0.0-1.0)
         """
         self.temperature = temperature
+        logger.info(f"🔧 Initializing TextLLMService with temperature={temperature}")
 
         # Ưu tiên Claude-3.5-Sonnet nếu có key, fallback GPT-4o
         if settings.anthropic_api_key:
+            logger.info("🤖 Using Claude-3.5-Sonnet model")
             self.llm = ChatAnthropic(
                 model="claude-3-5-sonnet-20241022",
                 temperature=temperature,
@@ -28,13 +33,17 @@ class TextLLMService:
             )
             self.model_name = "claude-3-5-sonnet"
         elif settings.openai_api_key:
+            logger.info(f"🤖 ChatOpenAI API key: {settings.openai_api_key}")
+            logger.info("🤖 Using openai/gpt-4o model")
             self.llm = ChatOpenAI(
-                model="gpt-4o",
+                openai_api_base="https://openrouter.ai/api/v1",
+                openai_api_key=settings.openai_api_key,
+                model_name="openai/gpt-4o",
                 temperature=temperature,
-                api_key=settings.openai_api_key
             )
-            self.model_name = "gpt-4o"
+            self.model_name = "openai/gpt-4o"
         else:
+            logger.error("❌ No API keys found for LLM services")
             raise ValueError("Cần ít nhất một trong hai API key: OPENAI_API_KEY hoặc ANTHROPIC_API_KEY")
 
     async def generate_script(
@@ -52,27 +61,57 @@ class TextLLMService:
         Returns:
             Dictionary containing script with narration and storyboard
         """
+        logger.info(f"📝 [TextLLMService] Starting script generation")
+        logger.info(f"📋 [TextLLMService] User prompt: {prompt[:100]}...")
+
+        if analysis_result:
+            logger.info(f"📊 [TextLLMService] Using analysis_result with {len(analysis_result)} keys")
+            logger.debug(f"📊 [TextLLMService] Analysis result: {analysis_result}")
+        else:
+            logger.info(f"⚠️ [TextLLMService] No analysis_result provided, using prompt only")
+
         # Build the system prompt
+        logger.info(f"🔨 [TextLLMService] Building script prompt...")
         system_prompt = self._build_script_prompt(prompt, analysis_result)
+        logger.info(f"📜 [TextLLMService] Script prompt length: {len(system_prompt)} characters")
 
         message = HumanMessage(content=system_prompt)
 
         try:
+            logger.info(f"🚀 [TextLLMService] Calling LLM API ({self.model_name})...")
+            start_time = logger.info(f"⏱️ [TextLLMService] API call started")
+
             response = await self.llm.ainvoke([message])
 
+            end_time = logger.info(f"⏱️ [TextLLMService] API call completed")
+            logger.info(f"📥 [TextLLMService] Response length: {len(response.content)} characters")
+            logger.info(f"📥 [TextLLMService] Response preview: {response.content[:200]}...")
+
             # Parse JSON response
+            logger.info(f"🔍 [TextLLMService] Parsing JSON response...")
             import json
             try:
                 script_data = json.loads(response.content)
-            except json.JSONDecodeError:
+                logger.info(f"✅ [TextLLMService] JSON parsing successful")
+                logger.info(f"📊 [TextLLMService] Script keys: {list(script_data.keys())}")
+
+                if "storyboard" in script_data:
+                    scene_count = len(script_data["storyboard"])
+                    logger.info(f"🎬 [TextLLMService] Generated {scene_count} storyboard scenes")
+
+            except json.JSONDecodeError as e:
+                logger.warning(f"⚠️ [TextLLMService] JSON parsing failed: {e}")
                 # Fallback: try to extract JSON from response
                 content = response.content.strip()
                 if "```json" in content:
+                    logger.info(f"🔧 [TextLLMService] Attempting to extract JSON from markdown...")
                     start = content.find("```json") + 7
                     end = content.find("```", start)
                     json_str = content[start:end].strip()
                     script_data = json.loads(json_str)
+                    logger.info(f"✅ [TextLLMService] JSON extraction from markdown successful")
                 else:
+                    logger.error(f"❌ [TextLLMService] Could not extract JSON, creating fallback script")
                     # If still fails, create basic structure
                     script_data = {
                         "narration": response.content.strip(),
@@ -90,11 +129,18 @@ class TextLLMService:
                     }
 
             # Validate and enhance the script data
+            logger.info(f"🔧 [TextLLMService] Validating and enhancing script...")
             script_data = self._validate_and_enhance_script(script_data)
+            logger.info(f"✅ [TextLLMService] Script generation completed successfully")
 
             return script_data
 
         except Exception as e:
+            logger.error(f"❌ [TextLLMService] Script generation failed: {str(e)}")
+            logger.error(f"❌ [TextLLMService] Error type: {type(e).__name__}")
+            import traceback
+            logger.error(f"❌ [TextLLMService] Traceback: {traceback.format_exc()}")
+
             # Return error structure
             return {
                 "narration": f"Lỗi khi tạo kịch bản: {str(e)}",

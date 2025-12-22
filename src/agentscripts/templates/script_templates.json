@@ -1,0 +1,38 @@
+{
+  "vietnamese_script": {
+    "id": "vietnamese_script",
+    "name": "Vietnamese Script Generation Template",
+    "description": "Template for generating Vietnamese video scripts",
+    "language": "vi",
+    "template": "Dựa trên phân tích sau đây, hãy tạo kịch bản video chi tiết:\n\nPhân tích: {analysis}\n\nYêu cầu kịch bản:\n1. Thời lượng: {duration} giây\n2. Số cảnh: {scene_count} cảnh\n3. Phong cách: {style}\n4. Tâm trạng: {mood}\n\nTạo:\n- Lời bình cho toàn bộ video (tiếng Việt)\n- Storyboard chi tiết với:\n  * Mã cảnh (scene_001, scene_002, ...)\n  * Mô tả hình ảnh cho từng cảnh\n  * Thời lượng mỗi cảnh\n  * Lời bình cho từng cảnh\n  * Hiệu ứng chuyển cảnh (nếu có)\n\nTrả về JSON với cấu trúc: {{\"narration\": \"...\", \"storyboard\": [scenes...]}}",
+    "variables": ["analysis", "duration", "scene_count", "style", "mood"],
+    "category": "script",
+    "agent_type": "script",
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  },
+  "english_script": {
+    "id": "english_script",
+    "name": "English Script Generation Template",
+    "description": "Template for generating English video scripts",
+    "language": "en",
+    "template": "Based on this analysis, create a detailed video script:\n\nAnalysis: {analysis}\n\nRequirements:\n- Duration: {duration} seconds\n- Scenes: {scene_count} scenes\n- Style: {style}\n- Mood: {mood}\n\nGenerate:\n- Complete narration for the entire video\n- Detailed storyboard with:\n  * Scene IDs (scene_001, scene_002, ...)\n  * Visual description for each scene\n  * Duration for each scene\n  * Narration segment for each scene\n  * Transition effects (if applicable)\n\nReturn JSON with structure: {{\"narration\": \"...\", \"storyboard\": [scenes...]}}",
+    "variables": ["analysis", "duration", "scene_count", "style", "mood"],
+    "category": "script",
+    "agent_type": "script",
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  },
+  "cinematic_script": {
+    "id": "cinematic_script",
+    "name": "Cinematic Script Template",
+    "description": "Template for cinematic-style video scripts",
+    "language": "en",
+    "template": "Create a cinematic video script from this analysis:\n\nAnalysis: {analysis}\n\nCinematic Requirements:\n- Duration: {duration} seconds\n- Scenes: {scene_count} scenes\n- Style: {style}\n- Mood: {mood}\n\nFocus on:\n- Professional film language\n- Dramatic scene progression\n- Visual storytelling techniques\n- Emotional arc development\n- Pacing and rhythm\n\nGenerate:\n1. Opening hook narration\n2. Scene-by-scene breakdown with:\n   * Visual cinematography notes\n   * Camera movements\n   * Lighting descriptions\n   * Emotional tone\n   * Narration timing\n3. Closing narration\n\nReturn structured JSON for video production.",
+    "variables": ["analysis", "duration", "scene_count", "style", "mood"],
+    "category": "script",
+    "agent_type": "script",
+    "created_at": "2024-12-22T13:00:00Z",
+    "version": "1.0.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "tts",
+  "provider": "openai",
+  "model_id": "tts-1",
+  "name": "OpenAI TTS-1",
+  "description": "Fast and reliable text-to-speech from OpenAI",
+  "is_primary": false,
+  "priority": 2,
+  "voice": "alloy",
+  "voice_options": [
+    "alloy",
+    "echo",
+    "fable",
+    "onyx",
+    "nova",
+    "shimmer"
+  ],
+  "speed": 1.0,
+  "output_format": "mp3",
+  "sample_rate": 24000,
+  "cost_per_1k_characters": 0.015,
+  "capabilities": [
+    "text_to_speech",
+    "multiple_voices",
+    "speed_control"
+  ],
+  "use_cases": [
+    "narration_generation",
+    "fallback_for_elevenlabs",
+    "quick_prototyping"
+  ]
+}

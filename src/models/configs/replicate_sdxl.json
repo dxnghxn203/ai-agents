@@ -1,0 +1,41 @@
+{
+  "type": "image_generation",
+  "provider": "replicate",
+  "model_id": "stability-ai/sdxl",
+  "name": "Stable Diffusion XL",
+  "description": "High-quality image generation with advanced style control",
+  "is_primary": true,
+  "priority": 1,
+  "parameters": {
+    "width": 1024,
+    "height": 1024,
+    "num_inference_steps": 30,
+    "guidance_scale": 7.5,
+    "negative_prompt": "",
+    "num_outputs": 1,
+    "scheduler": "DPMSolverMultistep"
+  },
+  "cost_per_generation": 0.05,
+  "capabilities": [
+    "text_to_image",
+    "style_transfer",
+    "image_variations",
+    "inpainting",
+    "outpainting"
+  ],
+  "styles": [
+    "photorealistic",
+    "cinematic",
+    "anime",
+    "oil_painting",
+    "watercolor",
+    "digital_art",
+    "sketch"
+  ],
+  "use_cases": [
+    "scene_visualization",
+    "storyboard_images",
+    "concept_art",
+    "background_generation"
+  ]
+}
