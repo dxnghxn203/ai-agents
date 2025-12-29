@@ -3,8 +3,8 @@ from typing import Dict, Any, Optional, Callable
 import logging
 import traceback
 
-from src.models.schemas import AppState
-from src.services.ai.text_llm import TextLLMService
+from app.models.schemas import AppState
+from app.services.ai.text_llm import TextLLMService
 
 logger = logging.getLogger(__name__)
 

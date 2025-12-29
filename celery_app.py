@@ -8,12 +8,15 @@ from src.core.config import settings
 
 logger = logging.getLogger(__name__)
 
+logger.info("✅ Celery application initialized")
+logger.info(f"🔧 Broker URL: {os.getenv('CELERY_BROKER_URL', 'redis://:password_redis@localhost:6379/0')}")
+
 # Configure Celery
 app = Celery(
     'video_ai_agent',
-    broker=os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0'),
-    backend=os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0'),
-    include=['src.tasks.audio_task', 'src.tasks.visual_task', 'src.tasks.camera_task', 'src.tasks.merge_task']
+    broker=os.getenv('CELERY_BROKER_URL', 'redis://:password_redis@localhost:6379/0'),
+    backend=os.getenv('CELERY_RESULT_BACKEND', 'redis://:password_redis@localhost:6379/0'),
+    include=['src.tasks.audio_task', 'src.tasks.visual_task', 'src.tasks.camera_task', 'src.tasks.merge_task', 'src.tasks.workflow_task']
 )
 
 # Celery configuration
@@ -31,6 +34,7 @@ app.conf.update(
         'src.tasks.visual_task.*': {'queue': 'visual'},
         'src.tasks.camera_task.*': {'queue': 'camera'},
         'src.tasks.merge_task.*': {'queue': 'merge'},
+        'src.tasks.workflow_task.*': {'queue': 'workflow'},
     },
 
     # Queue configuration
@@ -39,6 +43,7 @@ app.conf.update(
         Queue('visual', routing_key='visual'),
         Queue('camera', routing_key='camera'),
         Queue('merge', routing_key='merge'),
+        Queue('workflow', routing_key='workflow'),
     ),
 
     # Worker configuration
@@ -71,4 +76,6 @@ app.conf.task_soft_time_limits = {
 }
 
 if __name__ == '__main__':
+    # Start the Celery worker
+    logger.info("🚀 Starting Celery worker")
     app.start()
