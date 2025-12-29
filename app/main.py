@@ -5,9 +5,9 @@ import os
 
 # Create FastAPI app
 app = FastAPI(
-    title="Lovinbot Video Generation API",
+    title="Lovinbot Lottie JSON Generation API",
     version="1.0.0",
-    description="Simple video generation API"
+    description="Simple Lottie JSON generation API"
 )
 
 # Configure CORS
@@ -23,21 +23,20 @@ app.add_middleware(
 app.include_router(motion_gen_router)
 
 # Create directories if they don't exist
-os.makedirs("app/previews", exist_ok=True)
-os.makedirs("app/templates/lottie_samples", exist_ok=True)
 os.makedirs("app/output", exist_ok=True)
-os.makedirs("app/output/videos", exist_ok=True)
+os.makedirs("app/templates/lottie_samples", exist_ok=True)
 
 
 @app.get("/")
 async def root():
     """Root endpoint"""
     return {
-        "message": "Lovinbot Video Generation API",
+        "message": "Lovinbot Lottie JSON Generation API",
         "version": "1.0.0",
         "endpoints": {
             "generation": "/v1/lottie/gen",
-            "download": "/v1/lottie/video/{conversation_id}/download"
+            "download": "/v1/lottie/json/{conversation_id}/download",
+            "preview": "/v1/lottie/json/{conversation_id}/preview"
         }
     }
 
@@ -45,4 +44,4 @@ async def root():
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
-    return {"status": "healthy", "service": "Lovinbot Video Generation"}
+    return {"status": "healthy", "service": "Lovinbot Lottie JSON Generation"}
